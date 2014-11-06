@@ -57,20 +57,17 @@ public class ArcanoidGame extends Game{
         public void collided(Sprite sprite, Sprite sprite1) {
             
             if (CollisionManager.isPixelCollide(sprite.getX(), sprite.getY(), sprite.getImage(), sprite1.getX(), sprite1.getY(), sprite1.getImage())){
-                Point2D centerBublic = new Point2D.Float((float)sprite.getX()+sprite.getWidth()/2, (float)sprite.getY()+sprite.getHeight()/2);
-                Point2D centerBall = new Point2D.Float((float)sprite1.getX()+sprite1.getWidth()/2, (float)sprite1.getY()+sprite1.getHeight()/2); 
+                Point2D centerBublic = new Point2D.Double(sprite.getX()+sprite.getWidth()/2, sprite.getY()+sprite.getHeight()/2);
+                Point2D centerBall = new Point2D.Double(sprite1.getX()+sprite1.getWidth()/2, sprite1.getY()+sprite1.getHeight()/2); 
                 
                 sprite1.setSpeed(-sprite1.getVerticalSpeed(), -sprite1.getHorizontalSpeed());
               
-                Point2D pNormal = new Point2D.Float((float)centerBublic.getX()-(float)centerBall.getX(), (float)centerBublic.getY() - (float)centerBall.getY());
+                Point2D pNormal = new Point2D.Double(centerBublic.getX()-centerBall.getX(), centerBublic.getY() - centerBall.getY());
                 VVector2D normal = new VVector2D(pNormal);
-               VVector2D speed = new VVector2D((float)sprite1.getHorizontalSpeed(), (float)sprite1.getVerticalSpeed());
-               VVector2D refl = VVector2D.reflect(speed, normal);
+                VVector2D speed = new VVector2D(sprite1.getHorizontalSpeed(), sprite1.getVerticalSpeed());
+                VVector2D refl = VVector2D.reflect(speed, normal);
                 
-             //   sprite1.setSpeed(refl.x(),refl.y());
-                
-               
-                
+               // sprite1.setSpeed(refl.x(),refl.y());             
             }
         }
     };
