@@ -8,8 +8,8 @@ package GameViewObjects;
 
 /**
  *
- * @author Sergey
+ * @author Сергей
  */
-public class BrickView {
+public class RacketView extends GameViewObject{
     
 }

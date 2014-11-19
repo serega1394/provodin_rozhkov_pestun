@@ -6,12 +6,10 @@
 
 package GameObjects;
 
-import arcanoidgame.*;
-
 /**
  *
- * @author Sergey
+ * @author Сергей
  */
-public class Ball extends GameObject{
+public class PlayField {
     
 }

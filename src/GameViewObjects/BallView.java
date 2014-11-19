@@ -8,8 +8,8 @@ package GameViewObjects;
 
 /**
  *
- * @author Sergey
+ * @author Сергей
  */
-public class BallView {
+public class BallView extends GameViewObject{
     
 }

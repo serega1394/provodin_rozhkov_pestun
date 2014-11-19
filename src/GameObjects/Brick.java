@@ -12,6 +12,6 @@ import arcanoidgame.*;
  *
  * @author Sergey
  */
-public class Brick {
+public abstract class Brick extends GameObject{
     
 }

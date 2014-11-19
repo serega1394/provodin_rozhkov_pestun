@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 
-package GameObjects;
-
-import arcanoidgame.*;
+package GameViewObjects;
 
 /**
  *
- * @author Sergey
+ * @author Сергей
  */
-public class Ball extends GameObject{
+public class RoyView extends GameViewObject{
     
 }

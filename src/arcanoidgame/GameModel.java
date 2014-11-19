@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 
-package GameObjects;
-
-import arcanoidgame.*;
+package arcanoidgame;
 
 /**
  *
- * @author Sergey
+ * @author Сергей
  */
-public class Ball extends GameObject{
+public class GameModel {
+    
+    public void update(){
+    
+    }
     
 }
