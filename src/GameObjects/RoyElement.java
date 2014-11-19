@@ -10,6 +10,6 @@ package GameObjects;
  *
  * @author Сергей
  */
-public class RoyElement{
+public class RoyElement extends GameObject{
     
 }
