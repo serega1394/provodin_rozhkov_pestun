@@ -29,9 +29,10 @@ public class PRPPlatform extends PRPBrick{
         }
         
         if(_mainGTGE.keyPressed(KeyEvent.VK_SPACE)){
-            PRPSprite tmpSprite=_mainGTGE.getLogic().addSprite(new PRPBall(getX()+getWidth()/2, getY()-20, _mainGTGE), "Ball.png");
-            tmpSprite.setHorizontalSpeed((new Random()).nextDouble()/3-0.25);
-            tmpSprite.setVerticalSpeed(-(new Random()).nextDouble()/3);
+            PRPBall tmpBall = new PRPBall(getX()+getWidth()/2, getY()-20, _mainGTGE);
+            _mainGTGE.getLogic().addSprite(tmpBall, "Ball.png");
+            tmpBall.setHorizontalSpeed((new Random()).nextDouble()/3-0.25);
+            tmpBall.setVerticalSpeed(-(new Random()).nextDouble()/3);
         }
     }
     

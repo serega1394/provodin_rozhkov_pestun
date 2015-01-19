@@ -65,7 +65,7 @@ public class PRPArcanoidShell {
     }
     
     
-    public PRPSprite addSprite(PRPSprite tmpSprite, String image){
+    public void addSprite(PRPSprite tmpSprite, String image){
         if(tmpSprite instanceof PRPBall){
             _balls.add(tmpSprite);
         }
@@ -77,7 +77,6 @@ public class PRPArcanoidShell {
         }
         
         _mainGTGE.addSprite(tmpSprite, image);
-        return tmpSprite;
     }
     
     private void removeSprite(PRPSprite sprite){
