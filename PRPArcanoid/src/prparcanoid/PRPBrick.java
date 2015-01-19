@@ -4,23 +4,40 @@
  */
 package prparcanoid;
 
+import com.golden.gamedev.object.collision.CollisionGroup;
+
 /**
  *
  * @author ve
  */
 public class PRPBrick extends PRPSprite{
 
-    public PRPBrick() {
-        super(0,0);
+    private PRPBrick() {
+        super(0,0, null);
         setType(SPRITE_TYPE.BRICK);
     }
-    public PRPBrick(double x, double y){
-        super(x,y);
+    public PRPBrick(double x, double y,PRPArcanoid mainGTGE){
+        super(x,y, mainGTGE);
         setType(SPRITE_TYPE.BRICK);
     }
     
     @Override
     public void update(long elapsedTime){
+        
+    }
+    
+    
+    public static int getWidth(){
+        return 50;
+    }
+    
+    public static int getHeight(){
+        return 20;
+    }
+    
+        
+    @Override
+    public void collided(int collisionSide){
         
     }
 }

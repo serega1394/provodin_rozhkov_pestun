@@ -13,19 +13,21 @@ import java.awt.Graphics2D;
  */
 public abstract class PRPSprite {
     
-    Sprite _spriteGTGE;
+    PRPSpriteGTGE _spriteGTGE;
+    PRPArcanoid _mainGTGE;
     
     /////////////
     enum SPRITE_TYPE{
         BALL,
-        ROCKET,
+        PLATFORM,
         BRICK
     }
     
     SPRITE_TYPE _type;
     
-    public PRPSprite(double x, double y){
-        _spriteGTGE = new Sprite();
+    public PRPSprite(double x, double y,PRPArcanoid mainGTGE){
+        _spriteGTGE = new PRPSpriteGTGE(this);
+        _mainGTGE = mainGTGE;
         setPos(x, y);
     }
     
@@ -70,9 +72,27 @@ public abstract class PRPSprite {
     public void move(double x,double y){
         _spriteGTGE.move(x, y);
     }
+    
+    public void setVerticalSpeed(double vSpeed){
+        _spriteGTGE.setVerticalSpeed(vSpeed);
+    }
+    
+    public void setHorizontalSpeed(double hSpeed){
+        _spriteGTGE.setHorizontalSpeed(hSpeed);
+    }
+    
+    public double  getVerticalSpeed(){
+        return _spriteGTGE.getVerticalSpeed();
+    }
+    
+    public double  getHorizontalSpeed(){
+        return _spriteGTGE.getHorizontalSpeed();
+    }
     //////////////////
     
     
+    ////// физика
     
+    public abstract  void collided(int collisionSide);
     
 }
