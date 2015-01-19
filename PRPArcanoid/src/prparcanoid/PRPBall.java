@@ -34,10 +34,10 @@ public class PRPBall extends PRPSprite{
     @Override
     public void update(long elapsedTime){
         if(getX()+getHorizontalSpeed()>640){
-            setHorizontalSpeed(-getHorizontalSpeed());
+            setHorizontalSpeed(-Math.abs(getHorizontalSpeed()));
         }
         else if(getX()+getHorizontalSpeed()<0){
-            setHorizontalSpeed(-getHorizontalSpeed());
+            setHorizontalSpeed(Math.abs(getHorizontalSpeed()));
         }
         
         if(getY()+getVerticalSpeed()>480){
@@ -46,7 +46,7 @@ public class PRPBall extends PRPSprite{
             _mainGTGE.getLogic().addToRemoveQueue(this);
         }
         else if(getY()+getVerticalSpeed()<0){
-            setVerticalSpeed(-getVerticalSpeed());
+            setVerticalSpeed(Math.abs(getVerticalSpeed()));
         }
     }
     
