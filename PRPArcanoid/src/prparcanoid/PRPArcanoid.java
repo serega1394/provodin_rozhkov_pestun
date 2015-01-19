@@ -12,6 +12,7 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.background.ColorBackground;
 import com.golden.gamedev.object.collision.CollisionGroup;
+import com.sun.org.apache.bcel.internal.generic.L2D;
 import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,6 +20,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +35,7 @@ public class PRPArcanoid extends Game{
     Background _backGround = new ColorBackground(new Color(255, 187, 9));
     PlayField _playField = new PlayField(_backGround);
    
-    SpriteGroup _groupBalls;
+    List<SpriteGroup> _groupBalls;
     SpriteGroup _groupBricks;
     
     Map<String, BufferedImage> _images;
@@ -53,24 +56,21 @@ public class PRPArcanoid extends Game{
     @Override
     public void initResources() {
         _images = new HashMap();
+        _groupBalls = new LinkedList();
         
-        _groupBalls = new SpriteGroup("groupBalls");
+        
+        
         _groupBricks = new SpriteGroup("groupBricks");
-        
-        _playField.addGroup(_groupBalls);
         _playField.addGroup(_groupBricks);
         
-        _playField.addCollisionGroup(_groupBalls, _groupBricks, new CollisionGroup() {
-
-            @Override
-            public void collided(Sprite ball, Sprite brick) {
-                revertPosition1();
-                _logic.collided(((PRPSpriteGTGE)ball).getSpriteLogic(), ((PRPSpriteGTGE)brick).getSpriteLogic(),collisionSide);
-            }
-        });
+        
         
         _logic = new PRPArcanoidShell(this);
         _logic.initResources();
+        
+//        for(int i=0;i<_groupBalls.size();++i){
+//            _playField.addGroup(_groupBalls.get(i));
+//        }
     }
  
     @Override
@@ -94,7 +94,32 @@ public class PRPArcanoid extends Game{
         sprite.setImage(_images.get(image));
         
         if(type == PRPSprite.SPRITE_TYPE.BALL){
-            _groupBalls.add(sprite);
+            SpriteGroup tmpSG = new SpriteGroup("groupBalls" + _groupBalls.size());
+            tmpSG.add(sprite);
+            _groupBalls.add(tmpSG);
+            
+            _playField.addGroup(tmpSG);
+            _playField.addCollisionGroup(tmpSG, _groupBricks, new CollisionGroup() {
+
+                @Override
+                public void collided(Sprite ball, Sprite brick) {
+                    revertPosition1();
+                    _logic.collided(((PRPSpriteGTGE)ball).getSpriteLogic(), ((PRPSpriteGTGE)brick).getSpriteLogic(),collisionSide);
+                }
+            });
+            
+            // коллизии нового шарика со всеми предыдущими
+            for(int i=0;i<_groupBalls.size()-1;++i){
+               _playField.addCollisionGroup(tmpSG, _groupBalls.get(i), new CollisionGroup() {
+
+                @Override
+                public void collided(Sprite ball1, Sprite ball2) {
+                    revertPosition1();
+                    revertPosition2();
+                    _logic.collided(((PRPSpriteGTGE)ball1).getSpriteLogic(), ((PRPSpriteGTGE)ball2).getSpriteLogic(),collisionSide);
+                }
+              });
+            }
         }
         else if(type == PRPSprite.SPRITE_TYPE.BRICK){
             _groupBricks.add(sprite);
@@ -107,7 +132,11 @@ public class PRPArcanoid extends Game{
     
     public void removeSprite(Sprite sprite){
         // тут лучше через setActive(false) но пока оставлю так
-        _groupBalls.remove(sprite);
+        for(int i=0;i<_groupBalls.size();++i){
+            if(_groupBalls.get(i).getActiveSprite()==sprite){
+                _groupBalls.get(i).setActive(false);
+            }
+        }
         _groupBricks.remove(sprite);
     }
 }

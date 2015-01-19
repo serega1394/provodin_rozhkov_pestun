@@ -22,10 +22,10 @@ public class PRPPlatform extends PRPBrick{
     
     @Override
     public void update(long elapsedTime){
-        if(_mainGTGE.keyDown(KeyEvent.VK_LEFT)){
+        if(_mainGTGE.keyDown(KeyEvent.VK_LEFT) && getX()>0){
             move(-5,0);
         }
-        else if(_mainGTGE.keyDown(KeyEvent.VK_RIGHT)){
+        else if(_mainGTGE.keyDown(KeyEvent.VK_RIGHT) && getX()<(640-getWidth())){
             move(5,0);
         }
     }

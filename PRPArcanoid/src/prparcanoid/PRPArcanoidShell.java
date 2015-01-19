@@ -4,6 +4,7 @@
  */
 package prparcanoid;
 
+import com.golden.gamedev.object.collision.CollisionGroup;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
@@ -28,6 +29,7 @@ public class PRPArcanoidShell {
     
     public void initResources() {
         addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",140,140);
+        addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",150,130);
         
         addSprite(PRPSprite.SPRITE_TYPE.PLATFORM, "platform.png", 640/2, 480-30);
         
@@ -40,6 +42,9 @@ public class PRPArcanoidShell {
         _balls.get(0).setPos(640/2, 480-30-20);
         _balls.get(0).setHorizontalSpeed(0.5);
         _balls.get(0).setVerticalSpeed(-0.2);
+        
+        _balls.get(1).setHorizontalSpeed(-0.5);
+        _balls.get(1).setVerticalSpeed(-0.2);
     }
     
     public void update(long elapsedTime){
@@ -85,6 +90,26 @@ public class PRPArcanoidShell {
         else if(sprite1.getType()==PRPSprite.SPRITE_TYPE.BALL 
                 && sprite2.getType() == PRPSprite.SPRITE_TYPE.PLATFORM){
             sprite1.collided(collisionSide);
+        }
+        else if(sprite1.getType()==PRPSprite.SPRITE_TYPE.BALL 
+                && sprite2.getType() == PRPSprite.SPRITE_TYPE.BALL){
+            /////
+            int collisionSide2=0;
+            if(collisionSide == CollisionGroup.BOTTOM_TOP_COLLISION ){
+                collisionSide2=CollisionGroup.TOP_BOTTOM_COLLISION;
+            }
+            else if(collisionSide == CollisionGroup.TOP_BOTTOM_COLLISION ){
+                collisionSide2=CollisionGroup.BOTTOM_TOP_COLLISION;
+            }
+            else if(collisionSide == CollisionGroup.LEFT_RIGHT_COLLISION ){
+                collisionSide2=CollisionGroup.RIGHT_LEFT_COLLISION;
+            }
+            else if(collisionSide == CollisionGroup.RIGHT_LEFT_COLLISION ){
+                collisionSide2=CollisionGroup.LEFT_RIGHT_COLLISION;
+            }
+            //////
+            sprite1.collided(collisionSide);
+            sprite2.collided(collisionSide2);
         }
     }
 }
