@@ -33,7 +33,7 @@ public class PRPBall extends PRPSprite{
     
     @Override
     public void update(long elapsedTime){
-        if(getX()+getHorizontalSpeed()>640){
+        if(getX()+getHorizontalSpeed()>640-this.getWidth()){
             setHorizontalSpeed(-Math.abs(getHorizontalSpeed()));
         }
         else if(getX()+getHorizontalSpeed()<0){
