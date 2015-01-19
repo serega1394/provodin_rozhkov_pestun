@@ -41,7 +41,9 @@ public class PRPBall extends PRPSprite{
         }
         
         if(getY()+getVerticalSpeed()>480){
-            setVerticalSpeed(-getVerticalSpeed());
+            // шарик вышел за нижнюю границу поля
+            //setVerticalSpeed(-getVerticalSpeed());
+            _mainGTGE.getLogic().addToRemoveQueue(this);
         }
         else if(getY()+getVerticalSpeed()<0){
             setVerticalSpeed(-getVerticalSpeed());

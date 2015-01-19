@@ -46,6 +46,9 @@ public class PRPArcanoid extends Game{
         }
     }
     
+    public PRPArcanoidShell getLogic(){
+        return _logic;
+    }
     /////
     public static void main(String[] args) {
         GameLoader game = new GameLoader(); // Класс, управляющий инициализацией приложения

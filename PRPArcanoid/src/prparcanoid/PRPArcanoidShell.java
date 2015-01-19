@@ -19,12 +19,15 @@ public class PRPArcanoidShell {
     
     List<PRPSprite> _bricks;
     List<PRPSprite> _balls;
+    
+    List<PRPSprite> _onRemove;
     //PRPSprite _ball;
 
     public PRPArcanoidShell(PRPArcanoid mainGTGE) {
         _mainGTGE=mainGTGE;
         _bricks=new LinkedList();
         _balls=new LinkedList();
+        _onRemove = new LinkedList();
     }
     
     public void initResources() {
@@ -48,6 +51,11 @@ public class PRPArcanoidShell {
     }
     
     public void update(long elapsedTime){
+        for(int i=0;i<_onRemove.size();++i){
+            removeSprite(_onRemove.get(i));
+        }
+        _onRemove = new LinkedList();
+        
         for(int i=0;i<_bricks.size();++i){
             _bricks.get(i).update(elapsedTime);
         }
@@ -81,6 +89,9 @@ public class PRPArcanoidShell {
         _mainGTGE.removeSprite(sprite.getSpriteGTGE());
     }
     
+    public void addToRemoveQueue(PRPSprite sprite){
+        _onRemove.add(sprite);
+    }
     public void collided(PRPSprite sprite1,PRPSprite sprite2, int collisionSide){
         if(sprite1.getType()==PRPSprite.SPRITE_TYPE.BALL 
                 && sprite2.getType() == PRPSprite.SPRITE_TYPE.BRICK){
