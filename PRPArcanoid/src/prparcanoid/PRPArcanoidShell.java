@@ -32,22 +32,22 @@ public class PRPArcanoidShell {
     
     public void initResources() {
         addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",140,140);
-        addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",150,130);
+        addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",400,400);
         
         addSprite(PRPSprite.SPRITE_TYPE.PLATFORM, "platform.png", 640/2, 480-30);
         
-        for(int i=0; i<4;++i){
-            for(int j=0;j<7;++j){
+        for(int i=0; i<5;++i){
+            for(int j=0;j<8;++j){
                 addSprite(PRPSprite.SPRITE_TYPE.BRICK, "Brick.png", 100+j*(PRPBrick.getWidth()), 140+i*(PRPBrick.getHeight()));
             }
         }
         //_sprites.get(0).setVerticalSpeed(-0.1);
         _balls.get(0).setPos(640/2, 480-30-20);
-        _balls.get(0).setHorizontalSpeed(0.5);
-        _balls.get(0).setVerticalSpeed(-0.2);
+        _balls.get(0).setHorizontalSpeed(0.3);
+        _balls.get(0).setVerticalSpeed(-0.1);
         
-        _balls.get(1).setHorizontalSpeed(-0.5);
-        _balls.get(1).setVerticalSpeed(-0.2);
+        _balls.get(1).setHorizontalSpeed(-0.3);
+        _balls.get(1).setVerticalSpeed(-0.1);
     }
     
     public void update(long elapsedTime){
@@ -65,7 +65,7 @@ public class PRPArcanoidShell {
     }
     
     
-    private void addSprite(PRPSprite.SPRITE_TYPE type, String image, double x,double y){
+    public PRPSprite addSprite(PRPSprite.SPRITE_TYPE type, String image, double x,double y){
         PRPSprite tmpSprite=null;
         if(type == PRPSprite.SPRITE_TYPE.BALL){
             tmpSprite = new PRPBall(x,y,_mainGTGE);
@@ -81,6 +81,7 @@ public class PRPArcanoidShell {
         }
         
         _mainGTGE.addSprite(type, tmpSprite.getSpriteGTGE(), image);
+        return tmpSprite;
     }
     
     private void removeSprite(PRPSprite sprite){

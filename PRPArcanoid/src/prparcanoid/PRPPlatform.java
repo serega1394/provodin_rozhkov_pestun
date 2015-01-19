@@ -5,6 +5,7 @@
 package prparcanoid;
 
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 /**
  *
@@ -27,6 +28,12 @@ public class PRPPlatform extends PRPBrick{
         }
         else if(_mainGTGE.keyDown(KeyEvent.VK_RIGHT) && getX()<(640-getWidth())){
             move(5,0);
+        }
+        
+        if(_mainGTGE.keyPressed(KeyEvent.VK_SPACE)){
+            PRPSprite tmpSprite=_mainGTGE.getLogic().addSprite(SPRITE_TYPE.BALL, "Ball.png", getX()+getWidth()/2, getY()-20);
+            tmpSprite.setHorizontalSpeed((new Random()).nextDouble()/3-0.25);
+            tmpSprite.setVerticalSpeed(-(new Random()).nextDouble()/3);
         }
     }
     
