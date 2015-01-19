@@ -31,14 +31,14 @@ public class PRPArcanoidShell {
     }
     
     public void initResources() {
-        addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",140,140);
-        addSprite(PRPSprite.SPRITE_TYPE.BALL, "Ball.png",400,400);
+        addSprite(new PRPBall(140, 140, _mainGTGE), "Ball.png");
+        addSprite(new PRPBall(400, 400, _mainGTGE), "Ball.png");
         
-        addSprite(PRPSprite.SPRITE_TYPE.PLATFORM, "platform.png", 640/2, 480-30);
+        addSprite(new PRPPlatform(640/2, 480-30, _mainGTGE), "platform.png");
         
         for(int i=0; i<5;++i){
             for(int j=0;j<8;++j){
-                addSprite(PRPSprite.SPRITE_TYPE.BRICK, "Brick.png", 100+j*(PRPBrick.getWidth()), 140+i*(PRPBrick.getHeight()));
+                addSprite(new PRPBrick(100+j*(PRPBrick.getWidth()), 140+i*(PRPBrick.getHeight()), _mainGTGE), "Brick.png");
             }
         }
         //_sprites.get(0).setVerticalSpeed(-0.1);
@@ -65,22 +65,18 @@ public class PRPArcanoidShell {
     }
     
     
-    public PRPSprite addSprite(PRPSprite.SPRITE_TYPE type, String image, double x,double y){
-        PRPSprite tmpSprite=null;
-        if(type == PRPSprite.SPRITE_TYPE.BALL){
-            tmpSprite = new PRPBall(x,y,_mainGTGE);
+    public PRPSprite addSprite(PRPSprite tmpSprite, String image){
+        if(tmpSprite instanceof PRPBall){
             _balls.add(tmpSprite);
         }
-        else if(type == PRPSprite.SPRITE_TYPE.BRICK){
-            tmpSprite = new PRPBrick(x,y,_mainGTGE);
+        else if(tmpSprite.getClass() == PRPBrick.class){
             _bricks.add(tmpSprite);
         }
-        else if(type == PRPSprite.SPRITE_TYPE.PLATFORM){
-            tmpSprite = new PRPPlatform(x,y,_mainGTGE);
+        else if(tmpSprite instanceof PRPPlatform){
             _bricks.add(tmpSprite);
         }
         
-        _mainGTGE.addSprite(type, tmpSprite.getSpriteGTGE(), image);
+        _mainGTGE.addSprite(tmpSprite, image);
         return tmpSprite;
     }
     
@@ -94,17 +90,14 @@ public class PRPArcanoidShell {
         _onRemove.add(sprite);
     }
     public void collided(PRPSprite sprite1,PRPSprite sprite2, int collisionSide){
-        if(sprite1.getType()==PRPSprite.SPRITE_TYPE.BALL 
-                && sprite2.getType() == PRPSprite.SPRITE_TYPE.BRICK){
+        if(sprite1 instanceof PRPBall && sprite2.getClass() == PRPBrick.class){
             sprite1.collided(collisionSide);
             removeSprite(sprite2);
         }
-        else if(sprite1.getType()==PRPSprite.SPRITE_TYPE.BALL 
-                && sprite2.getType() == PRPSprite.SPRITE_TYPE.PLATFORM){
+        else if(sprite1 instanceof PRPBall && sprite2 instanceof PRPPlatform){
             sprite1.collided(collisionSide);
         }
-        else if(sprite1.getType()==PRPSprite.SPRITE_TYPE.BALL 
-                && sprite2.getType() == PRPSprite.SPRITE_TYPE.BALL){
+        else if(sprite1 instanceof PRPBall && sprite2 instanceof PRPBall){
             /////
             int collisionSide2=0;
             if(collisionSide == CollisionGroup.BOTTOM_TOP_COLLISION ){

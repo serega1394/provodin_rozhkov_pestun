@@ -14,11 +14,9 @@ import java.util.Random;
 public class PRPPlatform extends PRPBrick{
     private PRPPlatform() {
         super(0,0,null);
-        setType(SPRITE_TYPE.PLATFORM);
     }
     public PRPPlatform(double x, double y,PRPArcanoid mainGTGE){
         super(x,y,mainGTGE);
-        setType(SPRITE_TYPE.PLATFORM);
     }
     
     @Override
@@ -31,7 +29,7 @@ public class PRPPlatform extends PRPBrick{
         }
         
         if(_mainGTGE.keyPressed(KeyEvent.VK_SPACE)){
-            PRPSprite tmpSprite=_mainGTGE.getLogic().addSprite(SPRITE_TYPE.BALL, "Ball.png", getX()+getWidth()/2, getY()-20);
+            PRPSprite tmpSprite=_mainGTGE.getLogic().addSprite(new PRPBall(getX()+getWidth()/2, getY()-20, _mainGTGE), "Ball.png");
             tmpSprite.setHorizontalSpeed((new Random()).nextDouble()/3-0.25);
             tmpSprite.setVerticalSpeed(-(new Random()).nextDouble()/3);
         }

@@ -13,7 +13,6 @@ import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.background.ColorBackground;
 import com.golden.gamedev.object.collision.CollisionGroup;
 import com.sun.org.apache.bcel.internal.generic.L2D;
-import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -92,13 +91,13 @@ public class PRPArcanoid extends Game{
     
     
     
-    public void addSprite(PRPSprite.SPRITE_TYPE type, Sprite sprite, String image){
+    public void addSprite(PRPSprite sprite, String image){
         addImage(image);
-        sprite.setImage(_images.get(image));
+        sprite.getSpriteGTGE().setImage(_images.get(image));
         
-        if(type == PRPSprite.SPRITE_TYPE.BALL){
+        if(sprite instanceof PRPBall){
             SpriteGroup tmpSG = new SpriteGroup("groupBalls" + _groupBalls.size());
-            tmpSG.add(sprite);
+            tmpSG.add(sprite.getSpriteGTGE());
             _groupBalls.add(tmpSG);
             
             _playField.addGroup(tmpSG);
@@ -124,11 +123,11 @@ public class PRPArcanoid extends Game{
               });
             }
         }
-        else if(type == PRPSprite.SPRITE_TYPE.BRICK){
-            _groupBricks.add(sprite);
+        else if(sprite.getClass() == PRPBrick.class){
+            _groupBricks.add(sprite.getSpriteGTGE());
         }
-        else if(type == PRPSprite.SPRITE_TYPE.PLATFORM){
-            _groupBricks.add(sprite);
+        else if(sprite instanceof PRPPlatform){
+            _groupBricks.add(sprite.getSpriteGTGE());
         }
         
     }

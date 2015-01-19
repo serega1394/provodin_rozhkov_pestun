@@ -16,11 +16,9 @@ public class PRPBall extends PRPSprite{
 
     private PRPBall() {
         super(0,0, null);
-        setType(SPRITE_TYPE.BALL);
     }
     public PRPBall(double x, double y,PRPArcanoid mainGTGE){
         super(x,y, mainGTGE);
-        setType(SPRITE_TYPE.BALL);
     }
     
     public static int getWidth(){

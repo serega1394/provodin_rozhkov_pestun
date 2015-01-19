@@ -16,15 +16,6 @@ public abstract class PRPSprite {
     PRPSpriteGTGE _spriteGTGE;
     PRPArcanoid _mainGTGE;
     
-    /////////////
-    enum SPRITE_TYPE{
-        BALL,
-        PLATFORM,
-        BRICK
-    }
-    
-    SPRITE_TYPE _type;
-    
     public PRPSprite(double x, double y,PRPArcanoid mainGTGE){
         _spriteGTGE = new PRPSpriteGTGE(this);
         _mainGTGE = mainGTGE;
@@ -37,16 +28,7 @@ public abstract class PRPSprite {
     
     public Sprite getSpriteGTGE(){
         return _spriteGTGE;
-    }
-    
-    public SPRITE_TYPE getType(){
-        return _type;
-    }
-    
-    protected void setType(SPRITE_TYPE type){
-        _type=type;
-    }
-    
+    }    
     
     /// ДВИЖЕНИЕ
     public void setPos(double x,double y){

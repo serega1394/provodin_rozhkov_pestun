@@ -14,11 +14,9 @@ public class PRPBrick extends PRPSprite{
 
     private PRPBrick() {
         super(0,0, null);
-        setType(SPRITE_TYPE.BRICK);
     }
     public PRPBrick(double x, double y,PRPArcanoid mainGTGE){
         super(x,y, mainGTGE);
-        setType(SPRITE_TYPE.BRICK);
     }
     
     @Override
